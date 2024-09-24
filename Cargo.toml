@@ -1,0 +1,4 @@
+[workspace]
+members = ['apps/*']
+[workspace.dependencies]
+bevy = { version = "0.14.1" }
