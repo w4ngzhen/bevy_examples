@@ -1,4 +1,5 @@
 use bevy::prelude::*;
+use bevy::render::camera::Viewport;
 
 fn main() {
     App::new()
@@ -10,7 +11,19 @@ fn main() {
 
 fn startup(mut commands: Commands, asset_server: Res<AssetServer>) {
     // add camera.
-    commands.spawn(Camera2dBundle::default());
+    commands.spawn(
+        Camera2dBundle {
+            camera: Camera {
+                viewport: Some(Viewport {
+                    physical_position: UVec2::new(50, 50),
+                    physical_size: UVec2::new(400, 200),
+                    ..default()
+                }),
+                ..default()
+            },
+            ..default()
+        }
+    );
     // then spawn Sprite.
     let img1: Handle<Image> = asset_server.load("img1.png");
     commands.spawn(SpriteBundle {
